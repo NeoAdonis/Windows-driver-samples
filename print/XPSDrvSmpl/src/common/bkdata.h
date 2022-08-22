@@ -24,6 +24,8 @@ Abstract:
 
 #include "bkschema.h"
 
+/* Example change pls ignore */
+
 namespace XDPrintSchema
 {
     namespace Binding
