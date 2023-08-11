@@ -3,6 +3,8 @@ param (
     [array]$ChangedFiles
 )
 
+# Test comment
+
 $Verbose = $false
 if ($PSBoundParameters.ContainsKey('Verbose')) {
     $Verbose = $PsBoundParameters.Get_Item('Verbose')
