@@ -1,0 +1,16 @@
+# Global owner
+# * @NeoAdonis
+
+# GitHub configuration
+# Windows Driver Kits team
+/.github/ @NeoAdonis
+
+# Code scanning workflow
+/.github/workflows/Code-Scanning.yml @NeoAdonis
+
+# Build scripts
+# Windows Driver Kits team
+/Build-*.ps1 @NeoAdonis
+
+# Sample - General
+/general/ @NeoAdonis
