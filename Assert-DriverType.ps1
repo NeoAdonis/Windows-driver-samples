@@ -26,28 +26,22 @@ param (
     [string]$RepositoryPath = (Get-Location)
 )
 
-# Get all .vcxproj files recursively
 $vcxprojFiles = Get-ChildItem -Path $RepositoryPath -Filter "*.vcxproj" -Recurse
 
 foreach ($vcxprojFile in $vcxprojFiles) {
-    # Read the contents of the .vcxproj file
     $vcxprojContent = Get-Content -Path $vcxprojFile.FullName
 
-    # Check if project is a user mode driver
     $isUserModeDriver = $vcxprojContent -match "\bWindowsUserModeDriver10\.0\b"
-    
-    # Check if project is an application for drivers
     $isDriverApplication = $vcxprojContent -match "\bWindowsApplicationForDrivers10\.0\b"
 
     if ($isUserModeDriver -or $isDriverApplication) {
         $driverType = ""
         $xml = [xml]$vcxprojContent
-        $xml.Project.ChildNodes | ForEach-Object {
-            if ($_.Name -eq "PropertyGroup" -and $driverType -eq "") {
-                $_.ChildNodes | ForEach-Object {
-                    if ($_.Name -eq "DriverType") {
-                        $driverType = $_.InnerText
-                    }
+        $xml.Project.ChildNodes | Where-Object { $_.Name -eq "PropertyGroup" } | ForEach-Object {
+            if ($driverType -eq "") {
+                $driverTypeNode = $_.ChildNodes | Where-Object { $_.Name -eq "DriverType" } | Select-Object -First 1
+                if ($driverTypeNode) {
+                    $driverType = $driverTypeNode.InnerText
                 }
             }
         }
