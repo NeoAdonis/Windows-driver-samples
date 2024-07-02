@@ -6,10 +6,6 @@
 ;
 ;    SampleDisplay.inf
 ;
-; Abstract:
-;
-;    Inf file for Kernel mode display only sample driver
-;
 ;--
 
 [Version]
@@ -42,6 +38,8 @@ SampleDisplay.sys=0
 %SampleDeviceName% = KDODSamp_Inst, ACPI\CLS_0003&SUBCLS_0000
 %SampleDeviceName% = KDODSamp_Inst, ACPI\CLS_0003&SUBCLS_0001
 
+
+; Hewwo!
 
 [Standard.NTarm]
 %SampleDeviceName% = KDODSamp_Inst, PCI\CC_0300
